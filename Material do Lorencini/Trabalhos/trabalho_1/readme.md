@@ -2,6 +2,56 @@
 
 Feito por Arthur Lorencin e João Bimbato
 
+# TODO
+
+DICA: No código, procure por TODO nos comentários
+
+## Funções genéricas
+
+- [ ] Importar o arquivo .stl do donkey kong
+- [ ] Plotar o donkey kong
+
+
+
+
+## Funções para serem alteradas
+
+set_variables:
+- [ ] Alterar as variáveis da câmera
+
+create_matplotlib_canvas:
+- [ ] Acertar os limites do eixo X
+- [ ] Acertar os limites do eixo Y
+- [ ] Criar a função de projeção que retorna um object_2d.
+- [ ] Plotar o object_2d.
+- [ ] Falta plotar o seu objeto 3D e os referenciais da câmera e do mundo
+
+## Funções para serem criadas para a classe MainWindow
+
+update_params_intrinsc:
+- [ ]
+
+update_world:
+- [ ]
+
+update_cam:<br>
+Essa função é chamada em create_cam_widget quando o botão de atualizar é clicado.
+- [ ]
+
+projection_2d:<br>
+Essa função é chamada em create_matplotlib_canvas e deve retornar um objeto.
+- [ ]
+
+generate_intrinsic_params_matrix:
+- [ ]
+
+update_canvas:
+- [ ]
+
+reset_canvas:
+- [ ]
+
+
 ## Descrição do trabalho
 
 Nesse primeiro trabalho vocês deverão fazer um programa onde será possível:
