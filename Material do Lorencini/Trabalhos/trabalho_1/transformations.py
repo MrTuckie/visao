@@ -29,6 +29,7 @@ def set_plot(ax=None,figure = None,lim=[-2,2]):
 
 def z_rotation(angle) -> np.ndarray:
     """ Rotação no eixo z em tantos 'angle' """
+    angle *= pi/180
     rotation_matrix=np.array([[cos(angle),-sin(angle),0,0],
                               [sin(angle),cos(angle),0,0],
                               [0,0,1,0],
@@ -37,6 +38,7 @@ def z_rotation(angle) -> np.ndarray:
 
 def x_rotation(angle) -> np.ndarray:
     """ Rotação no eixo x em tantos 'angle' """
+    angle *= pi/180
     rotation_matrix=np.array([[1,0,0,0],
                               [0, cos(angle),-sin(angle),0],
                               [0, sin(angle), cos(angle),0],
@@ -45,6 +47,7 @@ def x_rotation(angle) -> np.ndarray:
 
 def y_rotation(angle) -> np.ndarray:
     """ Rotação no eixo y em tantos 'angle' """
+    angle *= pi/180
     rotation_matrix=np.array([[cos(angle),0, sin(angle),0],
                               [0,1,0,0],
                               [-sin(angle), 0, cos(angle),0],
@@ -98,3 +101,16 @@ def initial_setup():
     cam = np.hstack([base,origin_point])
 
     return e1,e2,e3,base,origin_point,cam
+
+def homogenous(object):
+    """adiciona coordenadas homogêneas. Uma linha de uns no final"""
+    return np.vstack([object, np.ones(np.size(object,1))])
+
+
+def intrisic_matrix(focal_length,scale_x,scale_y,skew,principal_point_x,principal_point_y):
+    new_scale_x = scale_x * focal_length
+    new_scale_y = scale_y * focal_length
+    new_skew = skew * focal_length
+    matrix = np.array([[new_scale_x,new_skew,principal_point_x],[0,new_scale_y,principal_point_y],
+                       [0,0,1]])
+    return matrix

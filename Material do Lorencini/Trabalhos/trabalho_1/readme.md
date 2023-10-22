@@ -2,6 +2,24 @@
 
 Feito por Arthur Lorencin e João Bimbato
 
+
+## Tarefas do Arthur
+Lista:
+- Colocar o donkey kong
+- Mover novamente para ver o donkey kong
+## Tarefas do bimbato
+Lista:
+- lidar a projeção 2d
+- tirar as funções inúteis tipo generate_projection_matrix,
+
+# Parâmetros de Entrada
+
+## Câmera
+['X(move):', 'X(angle):', 'Y(move):', 'Y(angle):', 'Z(move):', 'Z(angle):']
+## Mundo
+['X(move):', 'X(angle):', 'Y(move):', 'Y(angle):', 'Z(move):', 'Z(angle):']
+## Parâmetros Intrísecos da Câmera
+['n_pixels_base:', 'n_pixels_altura:', 'ccd_x:', 'ccd_y:', 'dist_focal:', 'sθ:']
 # TODO
 
 DICA: No código, procure por TODO nos comentários
