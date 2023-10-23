@@ -340,24 +340,23 @@ class MainWindow(QMainWindow):
         self.update_canvas()
 
     def projection_2d(self):
-        matrix_G = np.linalg.inv(self.cam)
-        matrix_K = self.generate_intrinsic_params_matrix()
-        object_2d = np.dot(matrix_G, self.objeto)
-        object_2d = np.dot(self.projection_matrix, object_2d)
-        object_2d = np.dot(matrix_K, object_2d)
-        object_2d[0, :] = object_2d[0, :]/object_2d[2, :]
-        object_2d[1, :] = object_2d[1, :]/object_2d[2, :]
-        object_2d[2, :] = object_2d[2, :]/object_2d[2, :]
-        return object_2d
+        canonical_projection_matrix = np.eye(3, 4)
+        intrinsic_matrix = self.generate_intrinsic_params_matrix()
+        extrinsic_matrix = np.linalg.inv(self.cam)
+        projection_matrix = intrinsic_matrix@canonical_projection_matrix@extrinsic_matrix
+        objeto_projetado_homog = projection_matrix@self.objeto
+        objeto_projetado_cart = objeto_projetado_homog/objeto_projetado_homog[2,:]
+        return objeto_projetado_cart
 
     def generate_intrinsic_params_matrix(self):
-        ox = self.px_base/2
-        oy = self.px_altura/2
-        fsx = self.px_base*self.dist_foc/self.ccd[0]
-        fsy = self.px_altura*self.dist_foc/self.ccd[1]
-        fstheta = self.stheta*self.dist_foc
-        K = array([[fsx, fstheta, ox], [0, fsy, oy], [0, 0, 1]])
-        return K
+        #Define os parametros com os valores passados
+        f = self.dist_foc
+        sx = self.px_base/self.ccd[0]
+        sy = self.px_altura/self.ccd[1]
+        Ox = self.px_base/2
+        Oy = self.px_altura/2
+
+        return np.array([[f*sx, f*self.stheta, Ox], [0, f*sy, Oy], [0, 0, 1]])
 
     def update_canvas(self):
         plt.close('all')
