@@ -340,15 +340,13 @@ class MainWindow(QMainWindow):
         self.update_canvas()
 
     def projection_2d(self):
-        matrix_G = np.linalg.inv(self.cam)
-        matrix_K = self.generate_intrinsic_params_matrix()
-        object_2d = np.dot(matrix_G, self.objeto)
-        object_2d = np.dot(self.projection_matrix, object_2d)
-        object_2d = np.dot(matrix_K, object_2d)
-        object_2d[0, :] = object_2d[0, :]/object_2d[2, :]
-        object_2d[1, :] = object_2d[1, :]/object_2d[2, :]
-        object_2d[2, :] = object_2d[2, :]/object_2d[2, :]
-        return object_2d
+        canonical_projection_matrix = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0]])
+        intrinsic_matrix = self.generate_intrinsic_params_matrix()
+        extrinsic_matrix = np.linalg.inv(self.cam)
+        projection_matrix = intrinsic_matrix@canonical_projection_matrix@extrinsic_matrix
+        objeto_projetado_homog = projection_matrix@self.objeto
+        objeto_projetado_cart = objeto_projetado_homog/objeto_projetado_homog[2,:]
+        return objeto_projetado_cart
 
     def generate_intrinsic_params_matrix(self):
         ox = self.px_base/2
