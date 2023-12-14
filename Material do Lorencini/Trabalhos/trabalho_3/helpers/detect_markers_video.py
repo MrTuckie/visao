@@ -7,7 +7,7 @@ import sys
 
 
 
-file_name = "video01.mkv" 
+file_name = "helpers/video01.mkv" 
 aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_50)
 parameters =  aruco.DetectorParameters_create()
 vid = cv2.VideoCapture(file_name)
