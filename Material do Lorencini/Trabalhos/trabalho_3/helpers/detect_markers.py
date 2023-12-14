@@ -3,7 +3,7 @@ import cv2
 from cv2 import aruco
 import matplotlib.pyplot as plt
 
-frame = cv2.imread("photo01.jpg")
+frame = cv2.imread("helpers/photo01.jpg")
 
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_50)
